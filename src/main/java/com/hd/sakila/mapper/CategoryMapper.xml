@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hd.sakila.mapper.CategoryMapper">
+	<resultMap id="BaseResultMap" type="com.hd.sakila.pojo.Category">
+		<id column="category_id" property="categoryId" jdbcType="TINYINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="last_update" property="lastUpdate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		category_id, name, last_update
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.hd.sakila.pojo.CategoryExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from category
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Byte">
+		select
+		<include refid="Base_Column_List" />
+		from category
+		where category_id = #{categoryId,jdbcType=TINYINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Byte">
+		delete from category
+		where category_id = #{categoryId,jdbcType=TINYINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.hd.sakila.pojo.CategoryExample">
+		delete from category
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.hd.sakila.pojo.Category">
+		insert into category (category_id, name, last_update
+		)
+		values (#{categoryId,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR},
+		#{lastUpdate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.hd.sakila.pojo.Category">
+		insert into category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="lastUpdate != null">
+				last_update,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=TINYINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdate != null">
+				#{lastUpdate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.hd.sakila.pojo.CategoryExample"
+		resultType="java.lang.Integer">
+		select count(*) from category
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update category
+		<set>
+			<if test="record.categoryId != null">
+				category_id = #{record.categoryId,jdbcType=TINYINT},
+			</if>
+			<if test="record.name != null">
+				name = #{record.name,jdbcType=VARCHAR},
+			</if>
+			<if test="record.lastUpdate != null">
+				last_update = #{record.lastUpdate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update category
+		set category_id = #{record.categoryId,jdbcType=TINYINT},
+		name = #{record.name,jdbcType=VARCHAR},
+		last_update = #{record.lastUpdate,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hd.sakila.pojo.Category">
+		update category
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdate != null">
+				last_update = #{lastUpdate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where category_id = #{categoryId,jdbcType=TINYINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hd.sakila.pojo.Category">
+		update category
+		set name = #{name,jdbcType=VARCHAR},
+		last_update = #{lastUpdate,jdbcType=TIMESTAMP}
+		where category_id = #{categoryId,jdbcType=TINYINT}
+	</update>
+</mapper>
