@@ -20,7 +20,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -52,7 +53,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -95,7 +97,8 @@
 		where category_id = #{categoryId,jdbcType=TINYINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Byte">
-		delete from category
+		delete from
+		category
 		where category_id = #{categoryId,jdbcType=TINYINT}
 	</delete>
 	<delete id="deleteByExample" parameterType="com.hd.sakila.pojo.CategoryExample">
@@ -105,9 +108,11 @@
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.hd.sakila.pojo.Category">
-		insert into category (category_id, name, last_update
+		insert into category
+		(category_id, name, last_update
 		)
-		values (#{categoryId,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR},
+		values
+		(#{categoryId,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR},
 		#{lastUpdate,jdbcType=TIMESTAMP}
 		)
 	</insert>
@@ -162,9 +167,12 @@
 	</update>
 	<update id="updateByExample" parameterType="map">
 		update category
-		set category_id = #{record.categoryId,jdbcType=TINYINT},
-		name = #{record.name,jdbcType=VARCHAR},
-		last_update = #{record.lastUpdate,jdbcType=TIMESTAMP}
+		set category_id =
+		#{record.categoryId,jdbcType=TINYINT},
+		name =
+		#{record.name,jdbcType=VARCHAR},
+		last_update =
+		#{record.lastUpdate,jdbcType=TIMESTAMP}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -184,7 +192,9 @@
 	<update id="updateByPrimaryKey" parameterType="com.hd.sakila.pojo.Category">
 		update category
 		set name = #{name,jdbcType=VARCHAR},
-		last_update = #{lastUpdate,jdbcType=TIMESTAMP}
-		where category_id = #{categoryId,jdbcType=TINYINT}
+		last_update =
+		#{lastUpdate,jdbcType=TIMESTAMP}
+		where category_id =
+		#{categoryId,jdbcType=TINYINT}
 	</update>
 </mapper>
