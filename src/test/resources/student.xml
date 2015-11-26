@@ -49,4 +49,12 @@
 		<birthday>1987-06-08</birthday>
 		<memo>好学生commit-1</memo>
 	</student>
+	<student id="7" group="5">
+		<name>小花</name>
+		<sex>女</sex>
+		<age>21</age>
+		<email>xiaohua@126.com</email>
+		<birthday>1995-06-08</birthday>
+		<memo>好学生</memo>
+	</student>
 </root>
