@@ -40,4 +40,7 @@
 			pointcut="execution(* com.hd.service.impl.*.*(..))" />
 	</aop:config>
 
+	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
 </beans>
