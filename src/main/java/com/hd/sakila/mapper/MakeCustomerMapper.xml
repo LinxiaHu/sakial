@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hd.sakila.mapper.MakeCustomerMapper">
+	<resultMap id="CustomFilmResultMap" type="com.hd.sakila.pojo.MakeCustomer">
+		<!-- customer信息 -->
+		<id column="customer_id" property="customerId" />
+		<result column="email" property="email" />
+		<result column="address_id" property="addressId" />
+		<!-- rental信息 -->
+		<collection property="rentals" ofType="com.hd.sakila.pojo.MakeRental">
+			<id column="rental_id" property="rentalId" />
+			<result column="rental_date" property="rentalDate" />
+			<!-- inventories信息 -->
+			<collection property="inventories" ofType="com.hd.sakila.pojo.MakeInventory">
+				<id column="inventory_id" property="inventoryId" />
+				<!-- film信息 -->
+				<collection property="films" ofType="com.hd.sakila.pojo.Film">
+					<id column="film_id" property="filmId" />
+					<result column="replacement_cost" property="replacementCost" />
+				</collection>
+			</collection>
+		</collection>
+	</resultMap>
+
+
+
+	<!--custom到film的多对多映射，通过其他表来进行关联 -->
+	<select id="queryCustomFilm" resultMap="CustomFilmResultMap"
+		parameterType="com.hd.sakila.pojo.CustomQueryVo">
+		SELECT customer.customer_id, customer.email,
+		customer.address_id, rental.rental_date,
+		inventory.inventory_id ,
+		film.film_id, film.replacement_cost FROM
+		customer, rental, inventory,
+		film WHERE
+		customer.customer_id = rental.customer_id AND
+		rental.inventory_id = inventory.inventory_id
+		AND inventory.film_id =
+		film.film_id
+		AND customer.customer_id = #{makeCustomer.customerId}
+		ORDER BY
+		customer_id;
+	</select>
+
+</mapper>
