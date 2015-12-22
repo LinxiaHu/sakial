@@ -8,7 +8,7 @@
 <title>Welcome to qunar</title>
 </head>
 <body>
-<jsp:forward page="/WEB-INF/jsp/index.jsp"></jsp:forward>
+<jsp:forward page="/WEB-INF/jsp/ajaxAuh.jsp"></jsp:forward>
 
 </body>
 </html>
