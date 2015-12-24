@@ -7,5 +7,6 @@ import com.hd.sakila.pojo.MakeCustomer;
 
 
 public interface MakeCustomerMapper {
+	//
     public List<MakeCustomer> queryCustomFilm(CustomQueryVo customQueryVo);
 }

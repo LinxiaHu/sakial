@@ -41,6 +41,6 @@
 	</aop:config>
 
 	
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<!-- <aop:aspectj-autoproxy></aop:aspectj-autoproxy> -->
 
 </beans>

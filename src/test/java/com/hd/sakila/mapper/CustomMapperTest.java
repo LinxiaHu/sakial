@@ -25,10 +25,12 @@ public class CustomMapperTest {
     @Test
     public void testMakeCustomers() throws Exception {
     	MakeCustomerMapper makeCustomerMapper = (MakeCustomerMapper) applicationContext.getBean("makeCustomerMapper");
+    	System.out.println("自动生成的代理类：" + makeCustomerMapper);
     	CustomQueryVo customQueryVo = new CustomQueryVo();
     	MakeCustomer makeCustomer = new MakeCustomer();
     	makeCustomer.setCustomerId((short) 1);
     	customQueryVo.setMakeCustomer(makeCustomer);
+    	System.out.println("查询的参数是：" + customQueryVo.getMakeCustomer().getCustomerId());
     	List<MakeCustomer> queryCustomers = makeCustomerMapper.queryCustomFilm(customQueryVo);
     	System.out.println(queryCustomers);
     }
